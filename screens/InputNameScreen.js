@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -19,17 +19,33 @@ const HEIGHT_ROW = 40;
 
 const InputNameScreen = (props) => {
   const [name, setName] = useState("");
+  const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   const submitHandler = async () => {
+    setError(null);
+    setIsLoading(true);
     try {
-      console.log(name);
       await dispatch(authAction.authenticate(name));
+      setIsLoading(false);
     } catch (err) {
-      console.log(err);
+      setIsLoading(false);
+      setError(err.message);
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert("An error occured", error, [
+        {
+          text: "Okay",
+        },
+      ]);
+    }
+  }, [error]);
+
   return (
     <ImageBackground
       style={styles.main}
@@ -46,7 +62,7 @@ const InputNameScreen = (props) => {
           style={{ width: WIDTH_ROW, paddingHorizontal: 10, color: "white" }}
         />
       </View>
-      <TouchableOpacity onPress={() => submitHandler()}>
+      <TouchableOpacity onPress={() => submitHandler()} disabled={isLoading}>
         <View style={styles.button}>
           <Text style={{ color: "white" }}>Go</Text>
         </View>

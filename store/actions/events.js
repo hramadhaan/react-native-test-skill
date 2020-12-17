@@ -93,7 +93,6 @@ export const deleteTracking = (id) => {
         .child(id)
         .remove()
         .then(() => {
-          console.log("berhasil di hapus");
           dispatch({
             type: REMOVE_TRACKER,
             trackId: id,

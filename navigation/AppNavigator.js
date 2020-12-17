@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 const AppNavigator = (props) => {
   const isAuth = useSelector((state) => !!state.auth.userId);
   const login = useSelector((state) => state.auth.login);
-  console.log(login);
   return (
     <NavigationContainer>
       {isAuth && <HomeStack />}

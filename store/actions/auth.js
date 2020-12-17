@@ -19,7 +19,6 @@ export const authenticate = (name) => {
         .once("value")
         .then((snapshot) => {
           if (snapshot.exists()) {
-            console.log("Ada Bruh");
             const data = snapshot.val();
             dispatch({
               type: AUTHENTICATION,
@@ -37,7 +36,6 @@ export const authenticate = (name) => {
                 name: name,
               })
               .then(() => {
-                console.log("Data Set");
                 dispatch({
                   type: AUTHENTICATION,
                   userId: time,

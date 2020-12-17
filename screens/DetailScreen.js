@@ -35,18 +35,12 @@ const DetailScreen = (props) => {
 
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
-  console.ignoredYellowBox = ["Setting a timer"];
-
   const dispatch = useDispatch();
 
   const submitHandler = async () => {
     try {
       await dispatch(eventAction.addTracking(item));
-      // Alert.alert("Hello", "Berhasil");
-      // console.log("Hello");
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
   return (
     <View style={{ flex: 1 }}>
